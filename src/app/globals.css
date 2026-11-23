@@ -2,64 +2,435 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-primary: #0f172a;
-  --color-primary-hover: #1e293b;
-  --color-primary-text: #ffffff;
-  --color-accent: #2563eb;
-  --color-accent-light: #eff6ff;
-  --color-bg: #ffffff;
-  --color-surface: #f8fafc;
-  --color-border: #e2e8f0;
-  --color-text-dark: #0f172a;
-  --color-text-muted: #64748b;
-  --radius-btn: 0.75rem;
+/* ==========================================================================
+   GAMING HOUSE — ESTÁNDAR GLOBAL DE DISEÑO (HIGH-PERFORMANCE CYBER-MINIMALISM)
+   Fuente: Stitch Design System (projects/17932152699695532004)
+   ========================================================================== */
+
+:root,
+html.dark {
+  color-scheme: dark;
+  --gh-bg: #111317;
+  --gh-canvas: #0d0f12;
+  --gh-surface-lowest: #0c0e11;
+  --gh-surface-low: #161920;
+  --gh-surface-panel: #1a1c1f;
+  --gh-surface: #1e2023;
+  --gh-surface-high: #282a2d;
+  --gh-surface-highest: #333538;
+  --gh-surface-bright: #37393d;
+
+  --gh-primary: #00ff88;
+  --gh-primary-fixed: #60ff99;
+  --gh-primary-dim: #00e479;
+  --gh-on-primary: #003919;
+
+  --gh-secondary: #00e5ff;
+  --gh-secondary-fixed: #9cf0ff;
+  --gh-on-secondary: #00363d;
+
+  --gh-tertiary: #7000ff;
+  --gh-tertiary-fixed: #d1bcff;
+
+  --gh-error: #ffb4ab;
+  --gh-error-container: #93000a;
+
+  --gh-text: #e2e2e6;
+  --gh-text-bright: #f1ffef;
+  --gh-text-muted: #b9cbb9;
+  --gh-text-dim: #849585;
+
+  --gh-border: rgba(255, 255, 255, 0.09);
+  --gh-border-strong: rgba(255, 255, 255, 0.16);
+  --gh-border-neon: rgba(0, 255, 136, 0.45);
+  --gh-border-cyan: rgba(0, 229, 255, 0.45);
+
+  /* Compatibilidad con variables base de la plantilla */
+  --color-primary: var(--gh-primary);
+  --color-primary-hover: var(--gh-primary-fixed);
+  --color-primary-text: var(--gh-on-primary);
+  --color-accent: var(--gh-secondary);
+  --color-accent-light: rgba(0, 229, 255, 0.12);
+  --color-bg: var(--gh-bg);
+  --color-surface: var(--gh-surface);
+  --color-border: var(--gh-border);
+  --color-text-dark: var(--gh-text);
+  --color-text-muted: var(--gh-text-muted);
+  --radius-btn: 0.5rem;
   --radius-card: 1rem;
+
+  /* Curvas de animación de ingeniería de diseño (Emil Kowalski / Apple Design) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
+html,
 body {
-  color: var(--color-text-dark);
-  background: var(--color-bg);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  scroll-behavior: smooth;
+  background-color: var(--gh-bg) !important;
+  color: var(--gh-text) !important;
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Clases de utilidad globales personalizables */
-.theme-btn-primary {
-  background-color: var(--color-primary);
-  color: var(--color-primary-text);
-  border-radius: var(--radius-btn);
-  transition: all 0.2s ease-in-out;
+h1,
+h2,
+h3,
+h4,
+.font-heading {
+  font-family: var(--font-outfit), system-ui, sans-serif;
 }
 
-.theme-btn-primary:hover {
-  background-color: var(--color-primary-hover);
-  transform: translateY(-1px);
+/* ==========================================================================
+   1. LIENZO Y TEXTURAS CYBERPUNK
+   ========================================================================== */
+
+.gh-cyber-bg {
+  background-color: var(--gh-bg);
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(0, 255, 136, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(0, 229, 255, 0.06) 0%, transparent 40%),
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px;
 }
 
-.theme-btn-outline {
-  background-color: transparent;
-  color: var(--color-text-dark);
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-btn);
-  transition: all 0.2s ease-in-out;
+/* ==========================================================================
+   2. COMPONENTES ESTÁNDAR GAMING HOUSE (.gh-*)
+   ========================================================================== */
+
+/* Paneles y Contenedores con línea fotónica superior */
+.gh-panel {
+  position: relative;
+  background-color: var(--gh-surface-panel);
+  border: 1px solid var(--gh-border);
+  border-radius: 1rem;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.55);
 }
 
-.theme-btn-outline:hover {
-  border-color: var(--color-primary);
-  background-color: var(--color-surface);
+.gh-panel-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background: linear-gradient(90deg, #00ff88 0%, #00e5ff 55%, rgba(112, 0, 255, 0.6) 100%);
+  opacity: 0.9;
+  pointer-events: none;
 }
 
-.theme-card {
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
+/* Tarjetas de Producto / Módulos de Hardware */
+.gh-card,
+.theme-card,
+.clean-card {
+  position: relative;
+  background-color: var(--gh-surface) !important;
+  color: var(--gh-text) !important;
+  border: 1px solid var(--gh-border) !important;
   border-radius: var(--radius-card);
-  transition: all 0.25s ease;
+  transition:
+    transform 220ms var(--ease-out),
+    border-color 220ms ease,
+    box-shadow 220ms var(--ease-out);
 }
 
-.theme-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+@media (hover: hover) and (pointer: fine) {
+  .gh-card:hover,
+  .theme-card:hover,
+  .clean-card:hover {
+    border-color: var(--gh-border-neon) !important;
+    box-shadow:
+      0 14px 32px -6px rgba(0, 0, 0, 0.65),
+      0 0 24px -6px rgba(0, 255, 136, 0.25);
+    transform: translateY(-2px);
+  }
+}
+
+/* Inputs, Buscadores y Selectores Cyberpunk */
+.gh-input,
+.gh-select {
+  background-color: var(--gh-surface-lowest) !important;
+  color: var(--gh-text-bright) !important;
+  border: 1px solid var(--gh-border-strong) !important;
+  border-radius: 0.75rem;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.gh-input::placeholder {
+  color: var(--gh-text-dim) !important;
+}
+
+.gh-input:focus,
+.gh-input:focus-within,
+.gh-select:focus {
+  border-color: var(--gh-secondary) !important;
+  box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.3), 0 0 14px rgba(0, 229, 255, 0.22) !important;
+  outline: none !important;
+}
+
+/* Botón Primario Neón ("Listo para jugar") */
+.gh-btn-primary,
+.theme-btn-primary {
+  background-color: var(--gh-primary) !important;
+  color: var(--gh-on-primary) !important;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  border-radius: var(--radius-btn);
+  box-shadow: 0 0 24px -4px rgba(0, 255, 136, 0.4);
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gh-btn-primary:hover,
+  .theme-btn-primary:hover {
+    background-color: var(--gh-primary-fixed) !important;
+    box-shadow: 0 0 28px -2px rgba(0, 255, 136, 0.6);
+    transform: translateY(-1px);
+  }
+}
+
+.gh-btn-primary:active,
+.theme-btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* Botón Secundario Cian ("Personalizar / Explorar") */
+.gh-btn-cyan,
+.theme-btn-outline {
+  background-color: var(--gh-surface-low) !important;
+  color: var(--gh-secondary) !important;
+  border: 1px solid var(--gh-border-cyan) !important;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  border-radius: var(--radius-btn);
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gh-btn-cyan:hover,
+  .theme-btn-outline:hover {
+    background-color: rgba(0, 229, 255, 0.12) !important;
+    border-color: var(--gh-secondary) !important;
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
+  }
+}
+
+.gh-btn-cyan:active,
+.theme-btn-outline:active {
+  transform: scale(0.97);
+}
+
+/* Badges Técnicos */
+.gh-badge-neon {
+  background-color: var(--gh-primary);
+  color: var(--gh-on-primary);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.35);
+}
+
+.gh-badge-cyan {
+  background-color: rgba(0, 229, 255, 0.12);
+  color: var(--gh-secondary-fixed);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.gh-badge-violet {
+  background-color: rgba(112, 0, 255, 0.2);
+  color: var(--gh-tertiary-fixed);
+  border: 1px solid rgba(209, 188, 255, 0.35);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ==========================================================================
+   3. MOTOR DE UNIFORMIDAD GLOBAL (EVITA QUE CUALQUIER ELEMENTO ESCAPE AL TEMA)
+   Normaliza automáticamente clases heredadas (bg-white, bg-slate-*, text-slate-*)
+   y componentes internos de HeroUI en toda la tienda y el panel admin.
+   ========================================================================== */
+
+html.dark .bg-white,
+html.dark .bg-white\/95,
+html.dark .bg-white\/90 {
+  background-color: var(--gh-surface-panel) !important;
+  color: var(--gh-text) !important;
+}
+
+html.dark .bg-slate-50,
+html.dark .bg-slate-50\/50,
+html.dark .bg-slate-50\/60,
+html.dark .bg-slate-50\/70,
+html.dark .bg-slate-50\/80 {
+  background-color: var(--gh-surface-low) !important;
+}
+
+html.dark .bg-slate-100,
+html.dark .bg-slate-100\/70,
+html.dark .bg-slate-100\/80,
+html.dark .bg-slate-200,
+html.dark .bg-slate-200\/70 {
+  background-color: var(--gh-surface-high) !important;
+}
+
+/* Hovers y Focus heredados (evita fondos blancos al pasar el cursor en filtros, listas y tablas) */
+html.dark .hover\:bg-white:hover,
+html.dark .hover\:bg-slate-50:hover,
+html.dark .hover\:bg-slate-50\/60:hover,
+html.dark .hover\:bg-slate-100:hover,
+html.dark .hover\:bg-slate-100\/70:hover,
+html.dark .hover\:bg-slate-100\/80:hover,
+html.dark .hover\:bg-slate-200:hover {
+  background-color: rgba(0, 255, 136, 0.12) !important;
+  color: var(--gh-text-bright) !important;
+  box-shadow: inset 0 0 0 1px rgba(0, 255, 136, 0.35);
+}
+
+html.dark .hover\:bg-slate-50:hover span,
+html.dark .hover\:bg-slate-100:hover span {
+  color: var(--gh-primary) !important;
+}
+
+html.dark .focus\:bg-white:focus,
+html.dark .focus-within\:bg-white:focus-within {
+  background-color: var(--gh-surface-lowest) !important;
+  border-color: var(--gh-secondary) !important;
+}
+
+html.dark .hover\:text-slate-950:hover,
+html.dark .hover\:text-slate-900:hover,
+html.dark .hover\:text-slate-800:hover,
+html.dark .hover\:text-slate-700:hover {
+  color: var(--gh-primary) !important;
+}
+
+html.dark .text-blue-600 {
+  color: var(--gh-secondary) !important;
+}
+
+html.dark .hover\:text-blue-800:hover,
+html.dark .hover\:text-blue-600:hover {
+  color: var(--gh-primary) !important;
+}
+
+html.dark .text-slate-900,
+html.dark .text-slate-950,
+html.dark .text-slate-800 {
+  color: var(--gh-text-bright) !important;
+}
+
+html.dark .text-slate-700,
+html.dark .text-slate-600 {
+  color: var(--gh-text-muted) !important;
+}
+
+html.dark .text-slate-500,
+html.dark .text-slate-400 {
+  color: var(--gh-text-dim) !important;
+}
+
+html.dark .border-slate-100,
+html.dark .border-slate-200,
+html.dark .border-slate-200\/60,
+html.dark .border-slate-200\/70,
+html.dark .border-slate-200\/80,
+html.dark .border-slate-200\/90,
+html.dark .border-slate-300 {
+  border-color: var(--gh-border) !important;
+}
+
+html.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-slate-200\/80 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--gh-border) !important;
+}
+
+/* Botones primarios y enlaces activos con bg-slate-900 normalizados al estándar neón */
+html.dark button.bg-slate-900,
+html.dark a.bg-slate-900 {
+  background-color: var(--gh-primary) !important;
+  color: var(--gh-on-primary) !important;
+  box-shadow: 0 0 18px -4px rgba(0, 255, 136, 0.35);
+}
+
+html.dark button.bg-slate-900 svg,
+html.dark a.bg-slate-900 svg {
+  color: var(--gh-on-primary) !important;
+}
+
+/* Checkboxes de HeroUI con estética Cyberpunk */
+html.dark [data-slot="wrapper"] {
+  border-color: rgba(0, 255, 136, 0.35);
+}
+
+html.dark label[data-selected="true"] [data-slot="wrapper"] {
+  background-color: var(--gh-primary) !important;
+  border-color: var(--gh-primary) !important;
+  color: var(--gh-on-primary) !important;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.45);
+}
+
+/* Paginación HeroUI — Paleta Verde Neón Gaming House */
+html.dark nav[data-slot="base"] [data-slot="cursor"],
+html.dark [data-slot="cursor"],
+html.dark span.bg-slate-900 {
+  background-color: var(--gh-primary) !important;
+  color: var(--gh-on-primary) !important;
+  border: 1px solid var(--gh-primary) !important;
+  font-family: var(--font-jetbrains-mono), monospace !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 16px rgba(0, 255, 136, 0.5) !important;
+}
+
+html.dark nav[data-slot="base"] [data-slot="item"],
+html.dark nav[data-slot="base"] [data-slot="prev"],
+html.dark nav[data-slot="base"] [data-slot="next"] {
+  background-color: #14181f !important;
+  color: #b9cbb9 !important;
+  border: 1px solid rgba(0, 255, 136, 0.25) !important;
+  font-family: var(--font-jetbrains-mono), monospace !important;
+  transition: all 0.2s ease !important;
+}
+
+html.dark nav[data-slot="base"] [data-slot="item"]:hover,
+html.dark nav[data-slot="base"] [data-slot="prev"]:hover,
+html.dark nav[data-slot="base"] [data-slot="next"]:hover,
+html.dark nav[data-slot="base"] [data-slot="item"][data-hover="true"],
+html.dark nav[data-slot="base"] [data-slot="prev"][data-hover="true"],
+html.dark nav[data-slot="base"] [data-slot="next"][data-hover="true"] {
+  background-color: rgba(0, 255, 136, 0.15) !important;
+  color: var(--gh-primary) !important;
+  border-color: var(--gh-primary) !important;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.25) !important;
+}
+
+html.dark nav[data-slot="base"] [data-slot="item"][data-active="true"] {
+  background-color: var(--gh-primary) !important;
+  color: var(--gh-on-primary) !important;
+  border-color: var(--gh-primary) !important;
+  font-weight: 800 !important;
 }
 
 /* Ocultar flechas nativas en inputs numéricos */
@@ -74,21 +445,184 @@ input[type="number"] {
   appearance: textfield;
 }
 
-/* Scrollbar personalizada */
+/* Scrollbar personalizada oscura Cyberpunk */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #0c0e11;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #282a2d;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #00ff88;
+}
+
+/* ==========================================================================
+   4. UTILIDADES DE MOTION ENGINEERING & APPLE DESIGN (COMPOSITOR 60/120FPS)
+   ========================================================================== */
+
+/* Feedback táctil físico de 160ms en elementos interactivos */
+.gh-press {
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.gh-press:active {
+  transform: scale(0.97);
+}
+
+/* Borde especular interno multicapa estilo Apple Pro Dark */
+.gh-specular {
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    0 20px 48px -12px rgba(0, 0, 0, 0.72);
+}
+
+/* Hover elevado protegido por media query de puntero fino */
+.gh-hover-lift {
+  transition:
+    transform 240ms var(--ease-out),
+    border-color 200ms ease,
+    box-shadow 240ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gh-hover-lift:hover {
+    transform: translateY(-3px);
+  }
+}
+
+/* Cinta de telemetría infinita acelerada por compositor GPU (transform linear) */
+@keyframes gh-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.gh-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: gh-marquee-scroll 34s linear infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gh-marquee-track:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* Línea de escaneo óptico para el visor de hardware */
+@keyframes gh-scan-sweep {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(420%);
+    opacity: 0;
+  }
+}
+
+.gh-scanline {
+  animation: gh-scan-sweep 5.5s linear infinite;
+}
+
+/* Efecto Moving Border / Shimmer Beam estilo Aceternity UI (Compositor GPU) */
+@keyframes gh-border-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gh-moving-border {
+  animation: gh-border-spin 4s linear infinite;
+}
+
+@keyframes gh-shimmer-sweep {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+.gh-shimmer-after {
+  position: relative;
+  overflow: hidden;
+}
+
+.gh-shimmer-after::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: translateX(-120%) skewX(-18deg);
+  animation: gh-shimmer-sweep 3.2s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+  pointer-events: none;
+}
+
+/* Pulso ambiental suave para haces de luz de fondo */
+@keyframes gh-beam-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.06);
+  }
+}
+
+.gh-beam-glow {
+  animation: gh-beam-pulse 6s ease-in-out infinite;
+}
+
+/* Respeto estricto a prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body {
+    scroll-behavior: auto;
+  }
+  .gh-marquee-track,
+  .gh-scanline,
+  .gh-moving-border,
+  .gh-shimmer-after::after,
+  .gh-beam-glow {
+    animation: none !important;
+  }
+  .gh-hover-lift:hover,
+  .gh-press:active {
+    transform: none !important;
+  }
 }

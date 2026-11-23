@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Card, CardBody, Input, Button } from '@heroui/react';
-import { Lock, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Button } from '@heroui/react';
+import { Lock, Zap, ShieldCheck, ArrowLeft, Terminal, Cpu, Headphones } from 'lucide-react';
 import { AdminLoginSchema, AdminLoginFormData } from '@/lib/security/schemas';
 import { checkRateLimit } from '@/lib/security/rate-limiter';
 import { createClient } from '@/lib/supabase/client';
@@ -58,69 +59,124 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-6">
-        <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center mx-auto shadow-lg shadow-blue-500/25">
-            <Lock className="w-6 h-6" />
+    <div className="min-h-screen bg-[#111317] text-[#e2e2e6] flex items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-5">
+        {/* Top bar (Stitch Gaming House - Iniciar Sesión) */}
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-[#b9cbb9] hover:text-[#00ff88] transition-colors font-mono text-xs uppercase tracking-wider"
+          >
+            <ArrowLeft className="w-4 h-4" /> Tienda
+          </Link>
+          <div className="flex items-center gap-2 bg-[#282a2d] px-3 py-1 rounded-full border border-white/10">
+            <span className="w-2 h-2 rounded-full bg-[#00ff88] animate-pulse shadow-[0_0_8px_#00ff88]" />
+            <span className="font-mono text-[11px] text-[#b9cbb9] uppercase font-bold">
+              Servidores Activos
+            </span>
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Acceso Administrativo</h1>
-          <p className="text-xs text-slate-500">Panel seguro de control para el dueño de la tienda.</p>
         </div>
 
-        <Card shadow="none" className="bg-white border border-slate-200/80 rounded-3xl shadow-xl shadow-slate-200/50">
-          <CardBody className="p-8 space-y-5">
-            {error && (
-              <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium">
-                {error}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                label="Correo Electrónico"
-                type="email"
-                placeholder="admin@demo.com"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                variant="bordered"
-                classNames={{
-                  inputWrapper: 'bg-white border-slate-200 focus-within:border-blue-600',
-                }}
-                isRequired
-              />
-
-              <Input
-                label="Contraseña"
-                type="password"
-                placeholder="••••••••••••"
-                value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                variant="bordered"
-                classNames={{
-                  inputWrapper: 'bg-white border-slate-200 focus-within:border-blue-600',
-                }}
-                isRequired
-              />
-
-              <Button
-                type="submit"
-                isLoading={isLoading}
-                endContent={!isLoading && <ArrowRight className="w-4 h-4" />}
-                className="w-full bg-blue-600 text-white font-bold text-xs py-3 rounded-xl shadow-md shadow-blue-500/25 hover:bg-blue-700 transition"
-              >
-                Ingresar al Dashboard
-              </Button>
-            </form>
-
-            <div className="pt-2 text-center">
-              <span className="text-[11px] text-slate-400 flex items-center justify-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                Acceso encriptado con protocolo SSL y tokens JWT
-              </span>
+        {/* Hero Card con Ambiente Visual (Stitch) */}
+        <div className="relative overflow-hidden rounded-2xl bg-[#1a1c1f] border border-white/10 p-6 shadow-xl text-center">
+          <div className="absolute -right-12 -top-12 w-48 h-48 bg-[#00ff88]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -left-12 -bottom-12 w-40 h-40 bg-[#00e3fd]/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="relative z-10 flex flex-col items-center">
+            <div className="w-14 h-14 rounded-xl bg-[#333538] border border-[#00ff88]/30 flex items-center justify-center mb-3 shadow-md text-[#00ff88]">
+              <Lock className="w-7 h-7" />
             </div>
-          </CardBody>
-        </Card>
+            <h1 className="text-2xl font-black text-[#f1ffef] tracking-tight font-heading uppercase">
+              Bienvenido al Setup
+            </h1>
+            <p className="text-xs text-[#b9cbb9] max-w-xs mt-1">
+              Ingresa al portal de Gaming House para gestionar inventario, pedidos Blue Express y catálogo.
+            </p>
+          </div>
+        </div>
+
+        {/* Formulario Principal (Stitch) */}
+        <div className="bg-[#1a1c1f] border border-white/10 rounded-2xl p-6 shadow-xl space-y-5">
+          {error && (
+            <div className="p-3.5 rounded-xl bg-[#93000a]/40 border border-[#ffb4ab]/40 text-[#ffdad6] text-xs font-mono">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-1.5">
+              <label
+                htmlFor="email"
+                className="flex items-center justify-between text-[#e2e2e6] font-mono text-xs font-bold"
+              >
+                <span>CORREO ELECTRÓNICO</span>
+                <span className="text-[#00ff88] text-[11px]">ADMIN_GH</span>
+              </label>
+              <div className="relative flex items-center">
+                <Terminal className="w-4 h-4 text-[#b9cbb9] absolute left-3.5 pointer-events-none" />
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="admin@demo.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  required
+                  className="w-full bg-[#0c0e11] border border-white/15 focus:border-[#00e5ff] text-[#f1ffef] font-mono text-xs pl-10 pr-4 py-3 rounded-xl outline-none placeholder:text-[#849585] transition-all"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between font-mono text-xs font-bold">
+                <label htmlFor="password" className="text-[#e2e2e6]">
+                  CONTRASEÑA
+                </label>
+                <span className="text-[#9cf0ff] text-[11px]">AES-256</span>
+              </div>
+              <div className="relative flex items-center">
+                <Lock className="w-4 h-4 text-[#b9cbb9] absolute left-3.5 pointer-events-none" />
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••••••"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  required
+                  className="w-full bg-[#0c0e11] border border-white/15 focus:border-[#00e5ff] text-[#f1ffef] font-mono text-xs pl-10 pr-4 py-3 rounded-xl outline-none placeholder:text-[#849585] transition-all"
+                />
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              isLoading={isLoading}
+              endContent={!isLoading && <Zap className="w-4 h-4 fill-[#003919]" />}
+              className="w-full py-6 rounded-xl bg-[#00ff88] hover:bg-[#60ff99] text-[#003919] font-heading text-sm font-black uppercase tracking-wider shadow-[0_0_24px_-4px_rgba(0,255,136,0.4)] transition-all"
+            >
+              Entrar a Gaming House
+            </Button>
+          </form>
+        </div>
+
+        {/* Micro-Grid Inferior Stitch */}
+        <div className="bg-[#0c0e11] border border-white/10 rounded-2xl p-4">
+          <div className="grid grid-cols-3 gap-2 text-center font-mono">
+            <div className="bg-[#1a1c1f] p-2.5 rounded-xl flex flex-col items-center justify-center">
+              <ShieldCheck className="w-5 h-5 text-[#00ff88] mb-1" />
+              <span className="text-[10px] text-white font-bold">SSL 256-BIT</span>
+              <span className="text-[9px] text-[#b9cbb9]">Protegido</span>
+            </div>
+            <div className="bg-[#1a1c1f] p-2.5 rounded-xl flex flex-col items-center justify-center">
+              <Cpu className="w-5 h-5 text-[#00e5ff] mb-1" />
+              <span className="text-[10px] text-white font-bold">STOCK LIVE</span>
+              <span className="text-[9px] text-[#b9cbb9]">Tiempo Real</span>
+            </div>
+            <div className="bg-[#1a1c1f] p-2.5 rounded-xl flex flex-col items-center justify-center">
+              <Headphones className="w-5 h-5 text-[#60ff99] mb-1" />
+              <span className="text-[10px] text-white font-bold">24/7 OPS</span>
+              <span className="text-[9px] text-[#b9cbb9]">Blue Express</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

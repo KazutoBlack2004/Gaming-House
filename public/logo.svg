@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" width="420" height="100">
+  <defs>
+    <linearGradient id="neonGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FF88" />
+      <stop offset="100%" stop-color="#00E5FF" />
+    </linearGradient>
+    <filter id="shadowFilter" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00FF88" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <!-- Logo Icon: Stylized Geometric House + Gaming PC tower with power LED -->
+  <g transform="translate(10, 10)">
+    <!-- Shield / House / PC Silhouette -->
+    <path d="M 40 5 L 75 25 L 75 65 L 40 85 L 5 65 L 5 25 Z" fill="#14171E" stroke="url(#neonGlow)" stroke-width="4" filter="url(#shadowFilter)"/>
+    <!-- Internal Gaming G / Circuit element -->
+    <path d="M 40 22 L 60 33 L 60 57 L 40 68 L 20 57 L 20 40 L 38 40 L 38 48 L 28 48 L 28 53 L 40 60 L 52 53 L 52 37 L 40 30 Z" fill="url(#neonGlow)"/>
+    <circle cx="40" cy="12" r="3" fill="#00FF88"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="100" y="52" font-family="'Outfit', 'Inter', system-ui, sans-serif" font-weight="900" font-size="34" letter-spacing="1.5" fill="#FFFFFF">
+    GAMING<tspan fill="#00FF88">HOUSE</tspan>
+  </text>
+  <text x="102" y="74" font-family="'Inter', system-ui, sans-serif" font-weight="600" font-size="11" letter-spacing="3.5" fill="#8E9AA8">
+    READY TO PLAY • PC BUILDS
+  </text>
+</svg>

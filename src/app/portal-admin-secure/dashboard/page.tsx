@@ -188,20 +188,20 @@ export default function AdminDashboardPage() {
               <AreaChart data={SALES_DATA}>
                 <defs>
                   <linearGradient id="salesGradLight" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#0f172a" stopOpacity={0.2} />
-                    <stop offset="95%" stopColor="#0f172a" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#00ff88" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="#00ff88" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" vertical={false} />
                 <XAxis
                   dataKey="day"
-                  stroke="#94a3b8"
+                  stroke="#b9cbb9"
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
                 />
                 <YAxis
-                  stroke="#94a3b8"
+                  stroke="#b9cbb9"
                   fontSize={12}
                   tickLine={false}
                   axisLine={false}
@@ -210,19 +210,19 @@ export default function AdminDashboardPage() {
                 <Tooltip
                   formatter={(val: any) => [formatPrice(Number(val)), 'Ventas']}
                   contentStyle={{
-                    backgroundColor: '#ffffff',
-                    borderColor: '#e2e8f0',
+                    backgroundColor: '#161920',
+                    borderColor: '#00ff88',
                     borderRadius: '12px',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
-                    color: '#0f172a',
-                    fontWeight: '600',
+                    boxShadow: '0 4px 20px rgba(0,255,136,0.2)',
+                    color: '#f1ffef',
+                    fontWeight: '700',
                     fontSize: '12px',
                   }}
                 />
                 <Area
                   type="monotone"
                   dataKey="sales"
-                  stroke="#0f172a"
+                  stroke="#00ff88"
                   strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#salesGradLight)"

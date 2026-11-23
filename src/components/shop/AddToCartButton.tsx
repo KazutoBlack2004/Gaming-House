@@ -26,18 +26,18 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
 
   return (
     <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
-      <div className="flex items-center justify-between border border-slate-200 rounded-xl px-3 py-1.5 bg-white max-w-[130px]">
+      <div className="flex items-center justify-between border border-white/15 rounded-xl px-3 py-1.5 bg-[#0c0e11] max-w-[130px]">
         <button
           onClick={() => setQuantity(Math.max(1, quantity - 1))}
-          className="p-1 hover:bg-slate-100 rounded-lg text-slate-600"
+          className="p-1 hover:bg-[#1e2023] rounded-lg text-[#b9cbb9]"
           disabled={isOutOfStock || quantity <= 1}
         >
           <Minus className="w-4 h-4" />
         </button>
-        <span className="font-bold text-sm text-slate-800">{quantity}</span>
+        <span className="font-mono font-bold text-sm text-[#e2e2e6]">{quantity}</span>
         <button
           onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-          className="p-1 hover:bg-slate-100 rounded-lg text-slate-600"
+          className="p-1 hover:bg-[#1e2023] rounded-lg text-[#b9cbb9]"
           disabled={isOutOfStock || quantity >= product.stock}
         >
           <Plus className="w-4 h-4" />
@@ -48,13 +48,9 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
         isDisabled={isOutOfStock}
         onClick={handleAdd}
         startContent={added ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
-        className={`font-semibold flex-1 ${
-          added
-            ? "bg-emerald-600 text-white"
-            : "bg-slate-900 text-white hover:bg-slate-800"
-        }`}
+        className="font-mono font-bold flex-1 bg-[#00ff88] text-[#003919] hover:bg-[#60ff99] shadow-[0_0_20px_-4px_rgba(0,255,136,0.4)]"
       >
-        {added ? "¡Agregado!" : "Agregar al Carrito"}
+        {added ? '¡Agregado!' : 'Agregar al Carrito'}
       </Button>
     </div>
   );

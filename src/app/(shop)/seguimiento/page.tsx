@@ -109,16 +109,17 @@ function TrackingContent() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
       {/* Encabezado */}
       <div className="text-center space-y-2 max-w-xl mx-auto">
-        <span className="text-[11px] font-extrabold uppercase tracking-widest text-blue-600">
-          SEGUIMIENTO LOGÍSTICO BLUE EXPRESS CHILE
+        <span className="text-[11px] font-mono font-extrabold uppercase tracking-widest text-[#00ff88]">
+          SEGUIMIENTO LOGÍSTICO BLUE EXPRESS • GAMING HOUSE
         </span>
-        <h1 className="text-3xl font-black text-slate-900 tracking-tight uppercase">
+        <h1 className="text-3xl font-black text-white tracking-tight uppercase font-heading">
           Rastrea tu Pedido
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500">
-          Ingresa tu <strong>N° de Pedido</strong> (ej. <code className="text-slate-800">1002</code>) o tu{' '}
-          <strong>N° de Orden de Transporte (OT)</strong> de Blue Express (ej.{' '}
-          <code className="text-slate-800">7100293841</code>).
+        <p className="text-xs sm:text-sm text-[#b9cbb9]">
+          Ingresa tu <strong className="text-white">N° de Pedido</strong> (ej.{' '}
+          <code className="text-[#00ff88] font-mono">1002</code>) o tu{' '}
+          <strong className="text-white">N° de Orden de Transporte (OT)</strong> de Blue Express (ej.{' '}
+          <code className="text-[#00e5ff] font-mono">7100293841</code>).
         </p>
       </div>
 
@@ -130,19 +131,19 @@ function TrackingContent() {
         }}
         className="max-w-lg mx-auto flex gap-2.5"
       >
-        <div className="flex items-center gap-2.5 flex-1 bg-white border border-slate-200 focus-within:border-slate-900 focus-within:ring-2 focus-within:ring-slate-900/10 rounded-xl px-4 h-12 shadow-2xs transition-all">
-          <Search className="w-4 h-4 text-slate-400 shrink-0" />
+        <div className="flex items-center gap-2.5 flex-1 bg-[#0c0e11] border border-white/15 focus-within:border-[#00e5ff] rounded-xl px-4 h-12 transition-all">
+          <Search className="w-4 h-4 text-[#00ff88] shrink-0" />
           <input
             type="text"
             placeholder="N° de Pedido (1002) o N° OT Blue Express..."
             value={queryOrder}
             onChange={(e) => setQueryOrder(e.target.value)}
-            className="w-full bg-transparent border-none outline-none text-sm font-bold text-slate-900 placeholder:text-slate-400"
+            className="w-full bg-transparent border-none outline-none text-sm font-mono font-bold text-white placeholder:text-[#849585]"
           />
         </div>
         <Button
           type="submit"
-          className="h-12 px-6 rounded-xl bg-slate-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-slate-800 shadow-sm"
+          className="h-12 px-6 rounded-xl bg-[#00ff88] hover:bg-[#60ff99] text-[#003919] font-mono font-bold text-xs uppercase tracking-wider shadow-[0_0_20px_-4px_rgba(0,255,136,0.4)]"
         >
           Consultar
         </Button>
@@ -150,49 +151,49 @@ function TrackingContent() {
 
       {/* No encontrado */}
       {searched && !foundOrder && (
-        <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center space-y-3 max-w-lg mx-auto">
-          <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mx-auto">
+        <div className="bg-[#1a1c1f] border border-white/10 rounded-2xl p-8 text-center space-y-3 max-w-lg mx-auto">
+          <div className="w-12 h-12 rounded-2xl bg-[#93000a]/30 text-[#ffb4ab] flex items-center justify-center mx-auto">
             <AlertCircle className="w-6 h-6" />
           </div>
-          <h3 className="font-bold text-base text-slate-900">
+          <h3 className="font-bold text-base text-white font-heading">
             No encontramos el pedido u OT #{queryOrder}
           </h3>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[#b9cbb9]">
             Verifica que el número ingresado coincida con el comprobante enviado al confirmar tu compra.
           </p>
         </div>
       )}
 
       {foundOrder && (
-        <div className="bg-white border border-slate-200/90 rounded-2xl shadow-xs overflow-hidden divide-y divide-slate-200/80">
+        <div className="bg-[#1a1c1f] border border-white/10 rounded-2xl shadow-xl overflow-hidden divide-y divide-white/10">
           {/* Cabecera del Pedido */}
-          <div className="p-6 bg-slate-50/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-6 bg-[#1e2023] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#00ff88]">
                 ORDEN CONFIRMADA
               </span>
-              <h2 className="text-xl font-black text-slate-900 font-mono">
+              <h2 className="text-xl font-black text-white font-mono">
                 Pedido #{foundOrder.order_number}
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Destinatario: <strong className="text-slate-800">{foundOrder.payer_name}</strong> •{' '}
+              <p className="text-xs text-[#b9cbb9] mt-0.5">
+                Destinatario: <strong className="text-white">{foundOrder.payer_name}</strong> •{' '}
                 {new Date(foundOrder.created_at).toLocaleDateString()}
               </p>
             </div>
 
             <div className="text-left sm:text-right">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#b9cbb9] block">
                 SERVICIO DE TRANSPORTE
               </span>
-              <span className="text-sm font-black text-slate-900">
+              <span className="text-sm font-black text-white font-heading">
                 {carrierInfo?.name || 'Blue Express a Domicilio'}
               </span>
               {foundOrder.tracking_number ? (
-                <span className="block text-xs font-mono font-black text-blue-600 mt-0.5">
+                <span className="block text-xs font-mono font-bold text-[#00e5ff] mt-0.5">
                   OT Blue Express: {foundOrder.tracking_number}
                 </span>
               ) : (
-                <span className="block text-[11px] text-slate-400 mt-0.5">
+                <span className="block text-[11px] text-[#849585] font-mono mt-0.5">
                   OT se asignará al entregar el paquete a Blue Express
                 </span>
               )}
@@ -212,36 +213,38 @@ function TrackingContent() {
                     key={step.key}
                     className={`p-4 rounded-2xl border transition-all ${
                       isCurrent
-                        ? 'border-slate-900 bg-slate-900 text-white shadow-sm'
+                        ? 'border-[#00ff88] bg-[#00ff88]/15 text-white shadow-[0_0_20px_rgba(0,255,136,0.2)]'
                         : isCompleted
-                        ? 'border-emerald-200 bg-emerald-50/60 text-slate-900'
-                        : 'border-slate-200 bg-slate-50/50 text-slate-400'
+                        ? 'border-[#00ff88]/40 bg-[#1e2023] text-white'
+                        : 'border-white/10 bg-[#0c0e11]/60 text-[#849585]'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <div
                         className={`w-8 h-8 rounded-xl flex items-center justify-center ${
                           isCurrent
-                            ? 'bg-white/15 text-white'
+                            ? 'bg-[#00ff88] text-[#003919]'
                             : isCompleted
-                            ? 'bg-emerald-600 text-white'
-                            : 'bg-slate-200/70 text-slate-400'
+                            ? 'bg-[#00ff88]/20 text-[#00ff88]'
+                            : 'bg-[#1e2023] text-[#849585]'
                         }`}
                       >
                         <Icon className="w-4 h-4" />
                       </div>
-                      <span className="text-[10px] font-black uppercase tracking-wider">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider">
                         Paso {index + 1}
                       </span>
                     </div>
-                    <h4 className="font-black text-xs uppercase tracking-wider">{step.label}</h4>
+                    <h4 className="font-black text-xs uppercase tracking-wider font-heading">
+                      {step.label}
+                    </h4>
                     <p
                       className={`text-[11px] mt-0.5 ${
                         isCurrent
-                          ? 'text-slate-300'
+                          ? 'text-[#00ff88]'
                           : isCompleted
-                          ? 'text-slate-600'
-                          : 'text-slate-400'
+                          ? 'text-[#b9cbb9]'
+                          : 'text-[#849585]'
                       }`}
                     >
                       {step.desc}
@@ -253,14 +256,14 @@ function TrackingContent() {
 
             {/* Historial detallado de movimientos en Blue Express */}
             {blueTrackingDetails && (
-              <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
+              <div className="rounded-2xl border border-white/10 bg-[#1e2023] p-5 space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
                   <div>
-                    <span className="text-xs font-black text-slate-900 uppercase tracking-wider block">
+                    <span className="text-xs font-black text-white uppercase tracking-wider block font-heading">
                       Historial de Movimientos Blue Express (OT {foundOrder.tracking_number})
                     </span>
-                    <span className="text-[11px] text-slate-500">
-                      Estado actual: <strong>{blueTrackingDetails.statusLabel}</strong>
+                    <span className="text-[11px] text-[#b9cbb9] font-mono">
+                      Estado actual: <strong className="text-[#00ff88]">{blueTrackingDetails.statusLabel}</strong>
                     </span>
                   </div>
 
@@ -268,7 +271,7 @@ function TrackingContent() {
                     href={getBlueExpressOfficialUrl(foundOrder.tracking_number || '')}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors shrink-0"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#00e5ff] hover:bg-[#9cf0ff] text-[#001f24] text-xs font-mono font-bold transition-colors shrink-0"
                   >
                     <span>Ver en Blue.cl</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -279,24 +282,24 @@ function TrackingContent() {
                   {blueTrackingDetails.checkpoints.map((chk, idx) => (
                     <div
                       key={chk.id}
-                      className="flex items-start gap-3 p-3 rounded-xl bg-white border border-slate-200/80 text-xs"
+                      className="flex items-start gap-3 p-3 rounded-xl bg-[#0c0e11] border border-white/10 text-xs"
                     >
                       <div className="mt-0.5">
                         {idx === 0 ? (
-                          <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-[#00ff88] shrink-0" />
                         ) : (
-                          <Clock className="w-4 h-4 text-slate-400 shrink-0" />
+                          <Clock className="w-4 h-4 text-[#849585] shrink-0" />
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                          <span className="font-bold text-slate-900">
+                          <span className="font-bold text-white">
                             {chk.status} —{' '}
-                            <span className="text-blue-600 font-semibold">{chk.location}</span>
+                            <span className="text-[#00e5ff] font-mono">{chk.location}</span>
                           </span>
-                          <span className="text-[11px] font-mono text-slate-400">{chk.date}</span>
+                          <span className="text-[11px] font-mono text-[#b9cbb9]">{chk.date}</span>
                         </div>
-                        <p className="text-slate-500 text-[11px] mt-0.5">{chk.description}</p>
+                        <p className="text-[#b9cbb9] text-[11px] mt-0.5">{chk.description}</p>
                       </div>
                     </div>
                   ))}
@@ -306,36 +309,36 @@ function TrackingContent() {
           </div>
 
           {/* Detalle de Destino e Ítems */}
-          <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 bg-white">
+          <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#1a1c1f]">
             <div className="space-y-2">
-              <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <h4 className="text-xs font-mono font-extrabold uppercase tracking-wider text-[#00e5ff] flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5" /> Dirección de Entrega
               </h4>
-              <p className="text-xs font-bold text-slate-900">
+              <p className="text-xs font-bold text-white">
                 {foundOrder.shipping_address.street}
               </p>
-              <p className="text-xs text-slate-600">
+              <p className="text-xs text-[#b9cbb9]">
                 {foundOrder.shipping_address.city}, {foundOrder.shipping_address.state}
               </p>
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <h4 className="text-xs font-mono font-extrabold uppercase tracking-wider text-[#00ff88] flex items-center gap-1.5">
                 <Package className="w-3.5 h-3.5" /> Resumen del Pedido
               </h4>
-              <div className="space-y-1.5 text-xs">
+              <div className="space-y-1.5 text-xs font-mono">
                 {foundOrder.items?.map((item) => (
-                  <div key={item.id} className="flex justify-between text-slate-700">
+                  <div key={item.id} className="flex justify-between text-[#b9cbb9]">
                     <span>
                       {item.title} {item.variant_title ? `(${item.variant_title})` : ''} x
                       {item.quantity}
                     </span>
-                    <span className="font-bold text-slate-900">
+                    <span className="font-bold text-white">
                       {formatPrice(item.total_price)}
                     </span>
                   </div>
                 ))}
-                <div className="pt-2 border-t border-slate-100 flex justify-between font-black text-slate-900">
+                <div className="pt-2 border-t border-white/10 flex justify-between font-black text-[#00ff88]">
                   <span>Total Pagado</span>
                   <span>{formatPrice(foundOrder.total_amount)}</span>
                 </div>

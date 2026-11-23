@@ -7,7 +7,7 @@ import { Providers } from '../providers';
 export default function ShopLayout({ children }: { children: React.ReactNode }) {
   return (
     <Providers>
-      <div className="relative min-h-screen flex flex-col bg-white text-slate-900">
+      <div className="relative min-h-screen flex flex-col gh-cyber-bg text-[#e2e2e6]">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
